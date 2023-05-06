@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="esimene">
+      <change afterPath="$PROJECT_DIR$/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kolmas_mmp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/led3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Pilt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,11 +86,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683361649700</updated>
-      <workItem from="1683362368318" duration="382000" />
+      <workItem from="1683362368318" duration="19287000" />
     </task>
+    <task id="LOCAL-00001" summary="esimene">
+      <created>1683362768018</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683362768018</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="esimene" />
+    <option name="LAST_COMMIT_MESSAGE" value="esimene" />
   </component>
 </project>
