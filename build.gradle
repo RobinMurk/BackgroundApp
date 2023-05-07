@@ -35,7 +35,9 @@ javafx {
 }
 
 dependencies {
-
+    // https://mvnrepository.com/artifact/net.java.dev.jna/jna
+    implementation 'net.java.dev.jna:jna:4.5.0'
+    implementation 'net.java.dev.jna:jna-platform:5.9.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

@@ -26,7 +26,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * tekstid - ListView piltide kirjelduste jaoks
@@ -37,12 +39,14 @@ import java.util.Arrays;
  */
 public class Main extends Application {
     ListView<String> tekstid = new ListView<String>();
-    ObservableList<String> data;
-    ImageView[] pildid;
+    ObservableList<String> data = FXCollections.observableArrayList();
+    ImageView[] pildid = new ImageView[0];
     String valitudListist;
-    String dropitud;
+    List<String> teeNimed = new ArrayList<>();
+
     int laius = 500;
     int kõrgus = 500;
+
 
     public static void main(String[] args) {
         launch();
@@ -77,13 +81,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage lava) throws Exception {
-        Pilt pilt1 = new Pilt("C:\\Users\\markusmi\\IdeaProjects\\OOP\\Projekt2\\BackgroundApp\\led3.png", "wallpaper");
+        /**Pilt pilt1 = new Pilt("C:\\Users\\markusmi\\IdeaProjects\\OOP\\Projekt2\\BackgroundApp\\led3.png", "wallpaper");
         Pilt pilt2 = new Pilt("C:\\Users\\markusmi\\IdeaProjects\\OOP\\Projekt2\\BackgroundApp\\1.png", "öööö");
         Pilt pilt3 = new Pilt("C:\\Users\\markusmi\\IdeaProjects\\OOP\\Projekt2\\BackgroundApp\\kolmas_mmp.png", "kolmas");
 
         pildid = new ImageView[]{pilt1.getEelvaade(), pilt2.getEelvaade(), pilt3.getEelvaade()};
         data = FXCollections.observableArrayList(pilt1.getNimi(), pilt2.getNimi(), pilt3.getNimi());
-        tekstid.setItems(data);
+        tekstid.setItems(data);*/
 
         listiKoostamine();
 
@@ -97,12 +101,7 @@ public class Main extends Application {
         ülemine.setSpacing(laius-87);
         alus.getChildren().add(ülemine);
         //nuppude funktsioonid:
-        lisa.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                dragAken();
-            }
-        });
+        lisa.setOnMouseClicked(event -> dragAken());
 
         //listi sisu
         VBox vb = new VBox(tekstid);
@@ -112,20 +111,23 @@ public class Main extends Application {
         HBox alumine = new HBox();
         Label valitud = new Label();
 
-        tekstid.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getButton().equals(MouseButton.PRIMARY)){
-                    if (event.getClickCount() == 1){
-                        valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps");
-                    }
-                    if (event.getClickCount()==2) {
-                        valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem() + "' on kinnitatud");//TODO: vaja fail nyyd panna taustapildiks
-                        valitudListist = tekstid.getSelectionModel().getSelectedItem();
-                    }
+        tekstid.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)){
+                if (event.getClickCount() == 1){
+                    valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps");
                 }
+                if (event.getClickCount()==2) {
+                    valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem() + "' on kinnitatud");//TODO: vaja fail nyyd panna taustapildiks
+                    valitudListist = tekstid.getSelectionModel().getSelectedItem();
+                    for (int i = 0; i < data.size(); i++) {
+                        if (data.get(i).equals(tekstid.getSelectionModel().getSelectedItem())){
+                            TasutapildiMuutja.muudatTaustakat(teeNimed.get(i));
+                        }
+                    }
 
+                }
             }
+
         });
         alumine.getChildren().add(valitud);
         alus.getChildren().add(alumine);
@@ -170,10 +172,10 @@ public class Main extends Application {
             boolean kas = false;
             if (db.hasFiles()) {
                 String failitee = db.getFiles().get(0).getAbsolutePath();
+                teeNimed.add(failitee);
                 String nimi = db.getFiles().get(0).getName();
                 nimi = nimi.substring(0, nimi.lastIndexOf('.'));
                 kas = true;
-                dropitud = failitee;
                 Pilt pilt = new Pilt(failitee, nimi);
                 ImageView[] pildidAjutine = new ImageView[pildid.length+1];
 
@@ -198,4 +200,5 @@ public class Main extends Application {
         lava.setResizable(false);
         lava.show();
     }
+
 }
