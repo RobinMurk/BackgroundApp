@@ -30,13 +30,13 @@ import java.util.Objects;
 
 /**
  * tekstid - ListView piltide kirjelduste jaoks
- * data - sisaldab piltide nimesid selleks, et nad ListViewi lisada
+ * nimed - sisaldab piltide nimesid selleks, et nad ListViewi lisada
  * pildid - piltide massiiv
- * valitudListist - kui topeltklikkitakse siis saab kasutada, et taustapilt ära vahetada
+ * teeNimed - piltide absoluutsed tee nimed
  * laius, kõrgus - on esialgsed akna parameetrid
  */
 public class Main extends Application {
-    ListView<String> tekstid = new ListView<>();
+    ListView<Pilt> tekstid = new ListView<>();
     ObservableList<String> nimed = FXCollections.observableArrayList();
     ImageView[] pildid = new ImageView[0];
     List<String> teeNimed = new ArrayList<>();
@@ -54,26 +54,23 @@ public class Main extends Application {
      */
     public void listiKoostamine(){
 
-        tekstid.setCellFactory(param -> new ListCell<String>() {
+        tekstid.setCellFactory(param -> new ListCell<Pilt>() {
 
             @Override
-            public void updateItem(String tekst, boolean tühi) {
+            public void updateItem(Pilt pilt, boolean tühi) {
                 Text t;
-                super.updateItem(tekst, tühi);
+                super.updateItem(pilt, tühi);
                 if (tühi) {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    for (int i = 0; i < pildid.length; i++) {
-                        if (nimed.get(i).equals(tekst)) {
-                            HBox hb = new HBox();
-                            t = new Text(tekst);
-                            hb.getChildren().addAll(pildid[i], t);
-                            hb.setSpacing(5);
-                            setGraphic(hb);
-                            break;
-                        }
-                    }
+                    HBox hb = new HBox();
+                    t = new Text(pilt.getNimi());
+                    hb.getChildren().addAll(pilt.getEelvaade(), t);
+                    hb.setSpacing(5);
+                    t.setTextAlignment(TextAlignment.CENTER);
+                    setGraphic(hb);
+
                 }
             }
 
@@ -81,34 +78,33 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage lava) throws EbasobivaFailiErind {
+    public void start(Stage lava) {
         //kui juba on salvestatud kausta pilte või on varem kasutatud, siis kuvatakse need kohe
-        List<Pilt> ajutinePildid = new ArrayList<>();// ajutine on selleks, et kätte saada vajalik suurus pildid imageview massiivi jaoks, kuhu kuuluksid ainult õiges formaadis failid
+        //List<Pilt> ajutinePildid = new ArrayList<>();// ajutine on selleks, et kätte saada vajalik suurus pildid imageview massiivi jaoks, kuhu kuuluksid ainult õiges formaadis failid
         File kaust1 = new File(System.getProperty("user.dir") + "/piltide_kaust");
         File[] failid = kaust1.listFiles();
         if (failid != null){//kui failid on tühi pole vaja midagi teha
             for (File fail : failid) {
                 if (fail.isFile()) {
-                    Pilt pilt = new Pilt(fail.getAbsolutePath(), fail.getName());
+                    Pilt pilt = new Pilt(fail.getAbsolutePath(), fail.getName().substring(fail.getName().lastIndexOf('.')));
                     try {
                         String nimi = fail.getName();
                         if (!nimi.substring(nimi.lastIndexOf('.')).equals(".jpg") && !nimi.substring(nimi.lastIndexOf('.')).equals(".png")){
                             throw new EbasobivaFailiErind("Kaustas oli vales formaadis fail");
                         }
-                        nimed.add(fail.getName().substring(0, fail.getName().lastIndexOf(".")));
-                        teeNimed.add(fail.getAbsolutePath());
-                        ajutinePildid.add(pilt);
-                    }catch (EbasobivaFailiErind e){
-
+                        tekstid.getItems().add(pilt);
+                        //teeNimed.add(fail.getAbsolutePath());
+                       // ajutinePildid.add(pilt);
+                    }catch (EbasobivaFailiErind ignored){
                     }
 
                 }
             }
-            tekstid.setItems(nimed);//kõik datas olnud nimed pannakse listview objekti
-            pildid = new ImageView[ajutinePildid.size()];
+            //tekstid.setItems(nimed);//kõik datas olnud nimed pannakse listview objekti
+            /*pildid = new ImageView[ajutinePildid.size()];
             for (int i = 0; i < pildid.length; i++) {
                 pildid[i] = ajutinePildid.get(i).getEelvaade();
-            }
+            }*/
         }
 
         listiKoostamine();//koostab imageview listi
@@ -140,12 +136,7 @@ public class Main extends Application {
                 }
                 if (event.getClickCount()==2) {//kui tehakse topeltklikk siis muudetakse desktopi pilt valitud pidli vastu
                     valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem() + "' on kinnitatud");
-                    for (int i = 0; i < nimed.size(); i++) {
-                        if (nimed.get(i).equals(tekstid.getSelectionModel().getSelectedItem())){
-                            TasutapildiMuutja.muudatTaustakat(teeNimed.get(i));
-                        }
-                    }
-
+                    TasutapildiMuutja.muudatTaustakat(tekstid.getSelectionModel().getSelectedItem().getTee());
                 }
             }
         });
@@ -156,8 +147,8 @@ public class Main extends Application {
             {
                 int indeks = tekstid.getSelectionModel().getSelectedIndex();
                 if ( keyEvent.getCode().equals( KeyCode.DELETE ) ){//kui listist on valitud objekt ja delete vajutatakse siis kustutatakse see ära
-                    tekstid.getItems().remove(indeks);// kustutuab automaatselt data listist ära
-                    teeNimed.remove(indeks);
+                    tekstid.getItems().remove(indeks);
+                    //teeNimed.remove(indeks);
                 }
             }
         });
@@ -190,15 +181,17 @@ public class Main extends Application {
                     pilt.delete();//kui tsükkel käidi läbi ilma if lauset täitmata siis kustutatakse pilt kaustast
                 }
             }
+            for (Pilt p : tekstid.getItems()){
 
-            for (String pilditee : teeNimed) {
+            }
+            for (Pilt p : tekstid.getItems()) {
                 boolean kasOnOlemas = false; //kontroll, kas faile lisati juurde vahepeal
                 File[] kaustasFailid = kaust.listFiles();//piltide kaustas olevad pildifailid
                 for(File fail : kaustasFailid){
-                    if(fail.getAbsolutePath().equals(pilditee)) kasOnOlemas = true;//kui on olemas siis pole vaja salvestada
+                    if(fail.getAbsolutePath().equals(p.getTee())) kasOnOlemas = true;//kui on olemas siis pole vaja salvestada
                 }
                 if(!kasOnOlemas) {//kui polnud sii salvestatakse fail kausta
-                    File pilt = new File(pilditee);
+                    File pilt = new File(p.getTee());
                     try (InputStream in = new FileInputStream(pilt);
                          OutputStream out = new FileOutputStream(System.getProperty("user.dir") + "/piltide_kaust/" + pilt.getName())) {
                         byte[] buffer = new byte[4096];
