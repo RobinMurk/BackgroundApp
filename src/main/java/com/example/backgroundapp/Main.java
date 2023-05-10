@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,10 +38,6 @@ import java.util.Objects;
  */
 public class Main extends Application {
     ListView<Pilt> tekstid = new ListView<>();
-    ObservableList<String> nimed = FXCollections.observableArrayList();
-    ImageView[] pildid = new ImageView[0];
-    List<String> teeNimed = new ArrayList<>();
-
     int laius = 500;
     int kõrgus = 500;
 
@@ -60,6 +57,7 @@ public class Main extends Application {
             public void updateItem(Pilt pilt, boolean tühi) {
                 Text t;
                 super.updateItem(pilt, tühi);
+
                 if (tühi) {
                     setText(null);
                     setGraphic(null);
@@ -70,7 +68,6 @@ public class Main extends Application {
                     hb.setSpacing(5);
                     t.setTextAlignment(TextAlignment.CENTER);
                     setGraphic(hb);
-
                 }
             }
 
@@ -85,8 +82,10 @@ public class Main extends Application {
         File[] failid = kaust1.listFiles();
         if (failid != null){//kui failid on tühi pole vaja midagi teha
             for (File fail : failid) {
+
                 if (fail.isFile()) {
-                    Pilt pilt = new Pilt(fail.getAbsolutePath(), fail.getName().substring(fail.getName().lastIndexOf('.')));
+                    Pilt pilt = new Pilt(fail.getAbsolutePath(), fail.getName().substring(0, fail.getName().lastIndexOf('.')));
+                    System.out.println(pilt.getNimi());
                     try {
                         String nimi = fail.getName();
                         if (!nimi.substring(nimi.lastIndexOf('.')).equals(".jpg") && !nimi.substring(nimi.lastIndexOf('.')).equals(".png")){
@@ -97,7 +96,6 @@ public class Main extends Application {
                        // ajutinePildid.add(pilt);
                     }catch (EbasobivaFailiErind ignored){
                     }
-
                 }
             }
             //tekstid.setItems(nimed);//kõik datas olnud nimed pannakse listview objekti
@@ -132,10 +130,10 @@ public class Main extends Application {
         tekstid.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)){
                 if (event.getClickCount() == 1){//kui ühe korra vajautatakse siis kuvatakse vastav tekst
-                    valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps" + System.lineSeparator() + "Eemaldamiseks vajuta 'delete'");
+                    valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem().getNimi() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps" + System.lineSeparator() + "Eemaldamiseks vajuta 'delete'");
                 }
                 if (event.getClickCount()==2) {//kui tehakse topeltklikk siis muudetakse desktopi pilt valitud pidli vastu
-                    valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem() + "' on kinnitatud");
+                    valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem().getNimi() + "' on kinnitatud");
                     TasutapildiMuutja.muudatTaustakat(tekstid.getSelectionModel().getSelectedItem().getTee());
                 }
             }
@@ -167,23 +165,21 @@ public class Main extends Application {
 
         lava.setOnCloseRequest(event ->{//sulgemisel salvestab failid vajalikku kausta
             File kaust = new File(System.getProperty("user.dir") + "/piltide_kaust");
-            for (File pilt : Objects.requireNonNull(kaust.listFiles())){
+            for (File fail : Objects.requireNonNull(kaust.listFiles())){
                 boolean kasEemaldati = false; //kontroll kas vahepeal kustutati fail listist
-                for (int i = 0; i < teeNimed.size(); i++) {
-                    if (teeNimed.get(i) != null) {
-                        if (pilt.getName().equals(nimed.get(i) + teeNimed.get(i).substring(teeNimed.get(i).lastIndexOf('.')))) {
+                for (Pilt pilt : tekstid.getItems()) {
+
+                        if (fail.getAbsolutePath().equals(pilt.getTee())) {
                             kasEemaldati = true;
                             break;
-                        }
+
                     }
                 }
                 if(!kasEemaldati) {
-                    pilt.delete();//kui tsükkel käidi läbi ilma if lauset täitmata siis kustutatakse pilt kaustast
+                    fail.delete();//kui tsükkel käidi läbi ilma if lauset täitmata siis kustutatakse pilt kaustast
                 }
             }
-            for (Pilt p : tekstid.getItems()){
 
-            }
             for (Pilt p : tekstid.getItems()) {
                 boolean kasOnOlemas = false; //kontroll, kas faile lisati juurde vahepeal
                 File[] kaustasFailid = kaust.listFiles();//piltide kaustas olevad pildifailid
@@ -253,18 +249,10 @@ public class Main extends Application {
                     }
                     nimi = nimi.substring(0, nimi.lastIndexOf('.'));
                     kas = true;
-                    teeNimed.add(failitee);
                     Pilt pilt = new Pilt(failitee, nimi);
-                    ImageView[] pildidAjutine = new ImageView[pildid.length + 1];//ajutine massiiv, et pildid massiivi uuendada
 
-                    for (int i = 0; i < pildid.length; i++) {
-                        pildidAjutine[i] = pildid[i];
-                    }
+                    tekstid.getItems().add(pilt);//
 
-                    pildidAjutine[pildidAjutine.length - 1] = pilt.getEelvaade();
-                    pildid = pildidAjutine;//draggitud pilt lisatud piltide hulka, et ta nüüd listi panna
-                    nimed.add(nimi);
-                    tekstid.setItems(nimed);//uuendame ka data listi ja uuendame tekstid listi
                 }
                 event.setDropCompleted(kas);
                 event.consume();
