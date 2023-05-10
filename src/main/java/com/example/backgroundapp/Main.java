@@ -286,5 +286,4 @@ public class Main extends Application {
         lava.setResizable(false);
         lava.show();
     }
-
 }
