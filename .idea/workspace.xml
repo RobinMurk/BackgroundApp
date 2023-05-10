@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="piltide lisamine, eemaldamine ja erind">
+    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="piltide kaust">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,14 +53,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/markusmi/IdeaProjects/OOP/Kt2",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/markusmi/IdeaProjects/OOP/Kt2&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.backgroundapp.HelloApplication" />
@@ -123,7 +124,35 @@
       <option name="project" value="LOCAL" />
       <updated>1683724480217</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="piltide kaust">
+      <created>1683726099729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683726099729</updated>
+    </task>
+    <task id="LOCAL-00003" summary="piltide kaust">
+      <created>1683726232967</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683726232967</updated>
+    </task>
+    <task id="LOCAL-00004" summary="piltide kaust">
+      <created>1683727009216</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1683727009216</updated>
+    </task>
+    <task id="LOCAL-00005" summary="piltide kaust">
+      <created>1683727239265</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683727239265</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +168,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="piltide lisamine, eemaldamine ja erind" />
-    <option name="LAST_COMMIT_MESSAGE" value="piltide lisamine, eemaldamine ja erind" />
+    <MESSAGE value="piltide kaust" />
+    <option name="LAST_COMMIT_MESSAGE" value="piltide kaust" />
   </component>
 </project>
