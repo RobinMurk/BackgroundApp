@@ -76,8 +76,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage lava) {
-        //kui juba on salvestatud kausta pilte või on varem kasutatud, siis kuvatakse need kohe
-        //List<Pilt> ajutinePildid = new ArrayList<>();// ajutine on selleks, et kätte saada vajalik suurus pildid imageview massiivi jaoks, kuhu kuuluksid ainult õiges formaadis failid
         File kaust1 = new File(System.getProperty("user.dir") + "/piltide_kaust");
         File[] failid = kaust1.listFiles();
         if (failid != null){//kui failid on tühi pole vaja midagi teha
