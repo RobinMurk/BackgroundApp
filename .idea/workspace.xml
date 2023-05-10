@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="piltide lisamine, eemaldamine ja erind">
+    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="piltide kaust">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piltide_kaust/bob_ja_kevin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/piltide_kaust/troopika.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/piltide_kaust/whoa.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +127,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683724480217</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="piltide kaust">
+      <created>1683726099729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683726099729</updated>
+    </task>
+    <task id="LOCAL-00003" summary="piltide kaust">
+      <created>1683726232967</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683726232967</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +157,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="piltide lisamine, eemaldamine ja erind" />
-    <option name="LAST_COMMIT_MESSAGE" value="piltide lisamine, eemaldamine ja erind" />
+    <MESSAGE value="piltide kaust" />
+    <option name="LAST_COMMIT_MESSAGE" value="piltide kaust" />
   </component>
 </project>
