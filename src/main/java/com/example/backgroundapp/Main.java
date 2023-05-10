@@ -1,8 +1,6 @@
 package com.example.backgroundapp;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
@@ -11,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -24,9 +21,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -77,15 +71,12 @@ public class Main extends Application {
     @Override
     public void start(Stage lava) {
         //kui juba on salvestatud kausta pilte või on varem kasutatud, siis kuvatakse need kohe
-        //List<Pilt> ajutinePildid = new ArrayList<>();// ajutine on selleks, et kätte saada vajalik suurus pildid imageview massiivi jaoks, kuhu kuuluksid ainult õiges formaadis failid
         File kaust1 = new File(System.getProperty("user.dir") + "/piltide_kaust");
         File[] failid = kaust1.listFiles();
         if (failid != null){//kui failid on tühi pole vaja midagi teha
             for (File fail : failid) {
-
                 if (fail.isFile()) {
                     Pilt pilt = new Pilt(fail.getAbsolutePath(), fail.getName().substring(0, fail.getName().lastIndexOf('.')));
-                    System.out.println(pilt.getNimi());
                     try {
                         String nimi = fail.getName();
                         if (!nimi.substring(nimi.lastIndexOf('.')).equals(".jpg") && !nimi.substring(nimi.lastIndexOf('.')).equals(".png")){
@@ -98,14 +89,9 @@ public class Main extends Application {
                     }
                 }
             }
-            //tekstid.setItems(nimed);//kõik datas olnud nimed pannakse listview objekti
-            /*pildid = new ImageView[ajutinePildid.size()];
-            for (int i = 0; i < pildid.length; i++) {
-                pildid[i] = ajutinePildid.get(i).getEelvaade();
-            }*/
         }
 
-        listiKoostamine();//koostab imageview listi
+        listiKoostamine();
 
         VBox alus = new VBox();//alus kus kõik ülejaanud objektid asetsevad
 
@@ -130,11 +116,14 @@ public class Main extends Application {
         tekstid.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY)){
                 if (event.getClickCount() == 1){//kui ühe korra vajautatakse siis kuvatakse vastav tekst
-                    valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem().getNimi() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps" + System.lineSeparator() + "Eemaldamiseks vajuta 'delete'");
+                    if (tekstid.getItems().size() > 0)
+                        valitud.setText("Valitud on: " + tekstid.getSelectionModel().getSelectedItem().getNimi() + System.lineSeparator() + "Taustapildi muutmiseks tehke topeltklõps" + System.lineSeparator() + "Eemaldamiseks vajuta 'delete'");
                 }
                 if (event.getClickCount()==2) {//kui tehakse topeltklikk siis muudetakse desktopi pilt valitud pidli vastu
-                    valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem().getNimi() + "' on kinnitatud");
-                    TasutapildiMuutja.muudatTaustakat(tekstid.getSelectionModel().getSelectedItem().getTee());
+                    if (tekstid.getItems().size() > 0) {
+                        valitud.setText("Valik '" + tekstid.getSelectionModel().getSelectedItem().getNimi() + "' on kinnitatud");
+                        TasutapildiMuutja.muudatTaustakat(tekstid.getSelectionModel().getSelectedItem().getTee());
+                    }
                 }
             }
         });
@@ -146,7 +135,6 @@ public class Main extends Application {
                 int indeks = tekstid.getSelectionModel().getSelectedIndex();
                 if ( keyEvent.getCode().equals( KeyCode.DELETE ) ){//kui listist on valitud objekt ja delete vajutatakse siis kustutatakse see ära
                     tekstid.getItems().remove(indeks);
-                    //teeNimed.remove(indeks);
                 }
             }
         });
@@ -168,11 +156,9 @@ public class Main extends Application {
             for (File fail : Objects.requireNonNull(kaust.listFiles())){
                 boolean kasEemaldati = false; //kontroll kas vahepeal kustutati fail listist
                 for (Pilt pilt : tekstid.getItems()) {
-
                         if (fail.getAbsolutePath().equals(pilt.getTee())) {
                             kasEemaldati = true;
                             break;
-
                     }
                 }
                 if(!kasEemaldati) {
