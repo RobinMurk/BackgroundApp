@@ -34,4 +34,21 @@ public class Pilt {
     public String getNimi() {
         return failinimi;
     }
+
+    public void setTee(String tee) {
+        this.tee = tee;
+    }
+
+    public void setFailinimi(String failinimi) {
+        this.failinimi = failinimi;
+    }
+
+    @Override
+    public String toString() {
+        return "Pilt{" +
+                "eelvaade=" + eelvaade +
+                ", tee='" + tee + '\'' +
+                ", failinimi='" + failinimi + '\'' +
+                '}';
+    }
 }

@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="uuendatud programm ühe listiga">
+    <list default="true" id="ffb55bc7-4a72-4f02-a082-3a059d49df34" name="Changes" comment="muudetud failid">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_10_2023_4_57_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_10_2023_4_57_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_7_2023_11_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_7_2023_11_29_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Pilt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/Pilt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/TasutapildiMuutja.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backgroundapp/TasutapildiMuutja.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +46,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="markus" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -57,7 +64,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/markusmi/IdeaProjects/OOP/Kt2",
+    "last_opened_file_path": "C:/Users/murkr/Desktop/Tartu Ülikool/Projects/BackgroundApp",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
   }
@@ -85,19 +92,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="BackgroundApp" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="BackgroundApp" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
